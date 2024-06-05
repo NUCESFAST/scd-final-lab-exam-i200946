@@ -1,0 +1,20 @@
+# Use a base image with Node.js and npm installed
+FROM node:14-alpine
+
+# Set the working directory in the container
+WORKDIR /20I-0946_backend
+
+# Copy the package.json and package-lock.json files to the working directory
+COPY server/package*.json ./
+
+# Install the backend dependencies
+RUN npm install
+
+# Copy the backend source code to the working directory
+COPY server .
+
+# Expose the port on which the backend API will run
+EXPOSE 2946
+
+# Start the backend application
+CMD ["npm", "start"]

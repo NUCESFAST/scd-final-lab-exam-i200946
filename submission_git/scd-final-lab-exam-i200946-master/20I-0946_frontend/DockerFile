@@ -1,0 +1,24 @@
+# syntax=docker/dockerfile:1
+# Use a base image with Node.js and npm installed
+FROM node:14-alpine
+
+# Set the working directory in the container
+WORKDIR /20I-0946_frontend
+
+# Copy the package.json and package-lock.json files to the working directory
+COPY client/package*.json ./
+
+# Install the frontend dependencies
+RUN npm install
+
+# Copy the frontend source code to the working directory
+COPY client .
+
+# Build the frontend assets
+RUN npm run build
+
+# Expose the port on which the frontend application will run
+EXPOSE 0946
+
+# Start the frontend application
+CMD ["npm", "start"]
